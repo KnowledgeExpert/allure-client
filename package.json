@@ -1,0 +1,29 @@
+{
+  "name": "allure-http-client",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "clean": "rm -rf ./built ./allure-results",
+    "build": "tsc",
+    "test": "npm run clean && npm run build && jasmine ./built/test/**/*.js",
+    "allure": "allure generate --clean --output ./allure-report ./allure-results"
+  },
+  "dependencies": {
+    "typescript": "2.8.3",
+    "@types/node": "9.6.6",
+    "file-type": "7.7.1",
+    "@types/file-type": "5.2.1",
+    "mime": "2.3.1",
+    "@types/mime": "2.0.0",
+    "fs-extra": "6.0.0",
+    "@types/fs-extra": "5.0.2",
+    "js2xmlparser": "3.0.0",
+    "uuid": "3.2.1"
+  },
+  "devDependencies": {
+    "jasmine-cookies": "git+ssh://git@github.com/KnowledgeExpert/jasmine-cookies.git",
+    "allure-commandline": "2.4.1"
+  },
+  "author": "",
+  "license": "ISC"
+}
