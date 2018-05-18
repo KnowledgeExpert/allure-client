@@ -6,6 +6,7 @@ export class Attachment {
     public readonly title: string;
     public readonly mime: string;
     public readonly fullFilePath: string;
+    public readonly fileName: string;
     public readonly size: number;
 
     constructor(attachmentObject) {
@@ -14,7 +15,8 @@ export class Attachment {
         this.title = attachmentObject.title;
         this.mime = attachmentObject.mime;
         this.size = buff.length;
-        this.fullFilePath = this.writeFile(buff, attachmentObject.fileName);
+        this.fileName = attachmentObject.fileId;
+        this.writeFile(buff, attachmentObject.fileId);
     }
 
     private writeFile(buffer: Buffer, fileName: string, baseDir = Configuration.baseDir): string {
@@ -27,7 +29,7 @@ export class Attachment {
         return {
             '@': {
                 title: this.title,
-                source: this.fullFilePath,
+                source: this.fileName,
                 type: this.mime,
                 size: this.size
             }

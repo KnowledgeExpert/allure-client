@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "clean": "rm -rf ./built ./allure-results",
-    "build": "tsc",
-    "test": "npm run clean && npm run build && jasmine ./built/test/**/*.js",
+    "build": "npm run clean && tsc",
+    "test": "npm run clean && npm run build && jasmine ./built/test.js",
     "allure": "allure generate --clean --output ./allure-report ./allure-results"
   },
   "dependencies": {
@@ -18,11 +18,14 @@
     "fs-extra": "6.0.0",
     "@types/fs-extra": "5.0.2",
     "js2xmlparser": "3.0.0",
-    "uuid": "3.2.1"
+    "uuid": "3.2.1",
+    "request": "2.86.0",
+    "request-promise-native": "1.0.5",
+    "@types/request-promise-native": "1.0.14"
   },
   "devDependencies": {
-    "jasmine-cookies": "git+ssh://git@github.com/KnowledgeExpert/jasmine-cookies.git",
-    "allure-commandline": "2.4.1"
+    "allure-commandline": "2.4.1",
+    "jasmine-cookies": "git+ssh://git@github.com/KnowledgeExpert/jasmine-cookies.git"
   },
   "author": "",
   "license": "ISC"

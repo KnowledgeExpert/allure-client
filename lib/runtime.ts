@@ -1,7 +1,7 @@
 import {Request} from "./request";
 import GET = Request.GET;
 import POST = Request.POST;
-
+import {ReadStream} from "fs";
 
 export namespace Runtime {
 
@@ -68,16 +68,20 @@ export namespace Runtime {
         return await POST('/description', {uuid: uuid, content: content, type: type});
     }
 
-    export async function addAttachment(uuid: string, name: string, mime: string, content: string | Buffer) {
+    export async function addAttachment(uuid: string, title: string, content: ReadStream | { mime: string, buffer: Buffer }) {
         assertTruthy('Uuid', uuid);
-        assertTruthy('Name', name);
+        assertTruthy('Name', title);
         assertTruthy('Content', content);
-        assertTruthy('Mime', mime);
         return await POST('/attachment', {
             uuid: uuid,
-            name: name,
-            mime: mime,
-            content: content
+            title: title,
+            attachment: content['mime'] ? {
+                value: content['buffer'],
+                options: {
+                    filename: 'NONE',
+                    contentType: content['mime']
+                }
+            } : content as ReadStream
         });
     }
 
