@@ -10,7 +10,7 @@ export class Attachment {
     public readonly size: number;
 
     constructor(attachmentObject) {
-        const buff = new Buffer(attachmentObject.bufferString);
+        const buff = new Buffer(attachmentObject.buffer);
 
         this.title = attachmentObject.title;
         this.mime = attachmentObject.mime;

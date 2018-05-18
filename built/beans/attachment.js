@@ -5,7 +5,7 @@ const configuration_1 = require("../configuration");
 const fs = require("fs-extra");
 class Attachment {
     constructor(attachmentObject) {
-        const buff = new Buffer(attachmentObject.bufferString);
+        const buff = new Buffer(attachmentObject.buffer);
         this.title = attachmentObject.title;
         this.mime = attachmentObject.mime;
         this.size = buff.length;
