@@ -2,6 +2,8 @@
   "name": "allure-client",
   "version": "1.0.0",
   "description": "",
+  "main": "./built/index.js",
+  "typings": "./built/index.d.ts",
   "scripts": {
     "clean": "rm -rf ./built ./allure-results",
     "build": "npm run clean && tsc",
