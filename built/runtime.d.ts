@@ -9,7 +9,7 @@ export declare namespace Runtime {
     function endTest(uuid: string, status: string, error?: Error, timestamp?: number): Promise<any>;
     function startStep(uuid: string, name: string, timestamp?: number): Promise<any>;
     function endStep(uuid: string, status: string, timestamp?: number): Promise<any>;
-    function addDescription(uuid: string, type: string, content: string): Promise<any>;
+    function setDescription(uuid: string, type: string, content: string): Promise<any>;
     function addAttachment(uuid: string, title: string, content: ReadStream | {
         mime: string;
         buffer: Buffer;

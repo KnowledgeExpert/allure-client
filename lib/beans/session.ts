@@ -43,8 +43,8 @@ export class Session {
         return await Runtime.endStep(this.uuid, status, timestamp).then(response => response.body);
     }
 
-    async setDescription(type: 'text' | 'text' | 'markdown', content: string) {
-        return await Runtime.addDescription(this.uuid, type, content).then(response => response.body);
+    async setDescription(type: 'text' | 'html' | 'markdown', content: string) {
+        return await Runtime.setDescription(this.uuid, type, content).then(response => response.body);
     }
 
     async addAttachment(title: string, content: ReadStream | { mime: string, buffer: Buffer }) {
@@ -71,7 +71,7 @@ export class Session {
         return await Runtime.addLabel(this.uuid, name, value).then(response => response.body);
     }
 
-    async addEnvironment(kind: string, name: string, value: string) {
+    async addEnvironment(name: string, value: string) {
         return await Runtime.addParameter(this.uuid, 'environment-variable', name, value).then(response => response.body);
     }
 

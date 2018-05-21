@@ -10,7 +10,7 @@ export declare class Session {
     endTest(status: 'broken' | 'failed' | 'passed' | 'skipped', error?: Error, timestamp?: number): Promise<any>;
     startStep(name: string, timestamp?: number): Promise<any>;
     endStep(status: 'failed' | 'passed', timestamp?: number): Promise<any>;
-    setDescription(type: 'text' | 'text' | 'markdown', content: string): Promise<any>;
+    setDescription(type: 'text' | 'html' | 'markdown', content: string): Promise<any>;
     addAttachment(title: string, content: ReadStream | {
         mime: string;
         buffer: Buffer;
@@ -20,7 +20,7 @@ export declare class Session {
     addStory(story: string): Promise<any>;
     addFeature(feature: string): Promise<any>;
     addLabel(name: string, value: string): Promise<any>;
-    addEnvironment(kind: string, name: string, value: string): Promise<any>;
+    addEnvironment(name: string, value: string): Promise<any>;
     addArgument(kind: string, name: string, value: string): Promise<any>;
     addParameter(kind: string, name: string, value: string): Promise<any>;
     writeToXML(): Promise<void>;

@@ -61,7 +61,7 @@ export namespace Runtime {
         return await POST('/endstep', {uuid: uuid, status: status, timestamp: timestamp});
     }
 
-    export async function addDescription(uuid: string, type: string, content: string) {
+    export async function setDescription(uuid: string, type: string, content: string) {
         assertTruthy('Uuid', uuid);
         assertTruthy('Content', content);
         assertTruthy('Type', type);

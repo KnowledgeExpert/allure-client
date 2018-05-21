@@ -61,13 +61,13 @@ var Runtime;
         return await POST('/endstep', { uuid: uuid, status: status, timestamp: timestamp });
     }
     Runtime.endStep = endStep;
-    async function addDescription(uuid, type, content) {
+    async function setDescription(uuid, type, content) {
         assertTruthy('Uuid', uuid);
         assertTruthy('Content', content);
         assertTruthy('Type', type);
         return await POST('/description', { uuid: uuid, content: content, type: type });
     }
-    Runtime.addDescription = addDescription;
+    Runtime.setDescription = setDescription;
     async function addAttachment(uuid, title, content) {
         assertTruthy('Uuid', uuid);
         assertTruthy('Name', title);

@@ -46,7 +46,11 @@ export namespace Request {
             options.json = true;
         }
         // console.log(options);
-        return await request(options);
+        try {
+            return await request(options);
+        } finally {
+            console.log(`request sent ${options.method} ${options.uri}`);
+        }
     }
 
 }
