@@ -8,16 +8,17 @@ Repository contains [Runtime](./lib/runtime.ts) module which handles http layer,
 
 ## Example
 
-Example for setting allure-client for Jasmine tests.
+For Jasmine you can simple inject allure-client as custom reporter:
 
 `base-spec.ts`
 ```
-async function() {
   const Configuration = require("allure-client").Configuration;
 
+  // setup some configurations
   Configuration.baseUrl = "http://localhost:3000";
   Configuration.baseDir = "build/allure-results";
 
+  // create Session object (it will automatically generate unic UUID for further operations)
   const session = await Session.create();
 
   jasmine.getEnv().addReporter({
@@ -29,16 +30,23 @@ async function() {
     },
     specDone: async function (spec) {
       const status = getTestcaseStatus(spec.status);
-      status !== 'passed' ? await session.endTest(status) : await session.endTest(status, getTestcaseError(spec));
+      if (status !== 'passed') {
+        await session.endTest(status);
+      } else {
+        await session.endTest(status, getTestcaseError(spec));
+      }
     },
     suiteDone: async function (result) {
       await session.endSuite();
     },
     jasmineDone: async function () {
+      // after all tests done, you should call writeToXML() method
+      // it will automatically pull collected data in JSON format
+      // and write it in local directory as XML structure
+      // which can be handled be allure-cli
       await session.writeToXML();
     }
   });
-}().then(res => console.log('Allure-Client reporter added!'));
 
 // util functions
 function getTestcaseStatus(status): 'skipped' | 'passed' | 'failed' {
