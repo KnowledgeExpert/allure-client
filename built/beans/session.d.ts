@@ -3,7 +3,7 @@ import { ReadStream } from "fs";
 export declare class Session {
     private readonly uuid;
     private constructor();
-    static create(): Promise<Session>;
+    static create(uuid?: string): Promise<Session>;
     startSuite(name: string, timestamp?: number): Promise<any>;
     endSuite(timestamp?: number): Promise<any>;
     startTest(name: string, timestamp?: number): Promise<any>;

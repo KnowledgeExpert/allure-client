@@ -15,6 +15,7 @@
 import {Runtime} from "../runtime";
 import * as xml from "js2xmlparser";
 import * as path from "path";
+import * as uuid from "uuid";
 import * as fs from "fs-extra";
 import {Suite} from "./suite";
 import {Configuration} from "../configuration";
@@ -28,8 +29,8 @@ export class Session {
         this.uuid = uuid;
     }
 
-    public static async create(): Promise<Session> {
-        return new Session(await Runtime.getSessionId().then(response => response.body));
+    public static async create(uuid?: string): Promise<Session> {
+        return new Session(uuid ? uuid : await Runtime.getSessionId().then(response => response.body));
     }
 
     async startSuite(name: string, timestamp = Date.now()) {

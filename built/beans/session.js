@@ -16,6 +16,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const runtime_1 = require("../runtime");
 const xml = require("js2xmlparser");
 const path = require("path");
+const uuid = require("uuid");
 const fs = require("fs-extra");
 const suite_1 = require("./suite");
 const configuration_1 = require("../configuration");
@@ -23,8 +24,8 @@ class Session {
     constructor(uuid) {
         this.uuid = uuid;
     }
-    static async create() {
-        return new Session(await runtime_1.Runtime.getSessionId().then(response => response.body));
+    static async create(uuid) {
+        return new Session(uuid ? uuid : await runtime_1.Runtime.getSessionId().then(response => response.body));
     }
     async startSuite(name, timestamp = Date.now()) {
         return await runtime_1.Runtime.startSuite(this.uuid, name, timestamp).then(response => response.body);
