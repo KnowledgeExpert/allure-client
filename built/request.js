@@ -63,7 +63,7 @@ var Request;
             return await request(options);
         }
         finally {
-            console.log(`request sent ${options.method} ${options.uri}`);
+            console.log(`request sent ${options.method} ${options.uri} ${options.body ? options.body.session_id : ''} ${options.body ? options.body.test_run_id : ''}`);
         }
     }
 })(Request = exports.Request || (exports.Request = {}));

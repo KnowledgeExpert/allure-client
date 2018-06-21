@@ -22,47 +22,54 @@ import {Configuration} from "../configuration";
 import {ReadStream} from "fs";
 
 
-export class Session {
-    private readonly uuid: string;
+export class TestRun {
+    private readonly session_id: string;
+    private readonly test_run_id: string;
 
-    private constructor(uuid: string) {
-        this.uuid = uuid;
+    private constructor(session_id: string, test_run_id: string) {
+        this.session_id = session_id;
+        this.test_run_id = test_run_id;
     }
 
-    public static async create(uuid?: string): Promise<Session> {
-        return new Session(uuid ? uuid : await Runtime.getSessionId().then(response => response.body));
+    public static async create(session_id?: string): Promise<TestRun> {
+        const b = await Runtime.getNewId().then(response => response.body);
+        console.log(b);
+        return new TestRun(
+            session_id ? session_id : await Runtime.getNewId().then(response => response.body),
+            await Runtime.getNewId().then(response => response.body)
+        );
     }
 
     async startSuite(name: string, timestamp = Date.now()) {
-        return await Runtime.startSuite(this.uuid, name, timestamp).then(response => response.body);
+        return await Runtime.startSuite(this.session_id, this.test_run_id, name, timestamp).then(response => response.body);
     }
 
     async endSuite(timestamp = Date.now()) {
-        return await Runtime.endSuite(this.uuid, timestamp).then(response => response.body);
+        return await Runtime.endSuite(this.session_id, this.test_run_id, timestamp).then(response => response.body);
     }
 
     async startTest(name: string, timestamp = Date.now()) {
-        return await Runtime.startTest(this.uuid, name, timestamp).then(response => response.body);
+        return await Runtime.startTest(this.session_id, this.test_run_id, name, timestamp).then(response => response.body);
     }
 
     async endTest(status: 'broken' | 'failed' | 'passed' | 'skipped', error?: Error, timestamp = Date.now()) {
-        return await Runtime.endTest(this.uuid, status, error ? error : null, timestamp).then(response => response.body);
+        return await Runtime.endTest(this.session_id, this.test_run_id, status, error ? error : null, timestamp).then(response => response.body);
     }
 
     async startStep(name: string, timestamp = Date.now()) {
-        return await Runtime.startStep(this.uuid, name, timestamp).then(response => response.body);
+        return await Runtime.startStep(this.session_id, this.test_run_id, name, timestamp).then(response => response.body);
     }
 
     async endStep(status: 'failed' | 'passed', timestamp = Date.now()) {
-        return await Runtime.endStep(this.uuid, status, timestamp).then(response => response.body);
+        return await Runtime.endStep(this.session_id, this.test_run_id, status, timestamp).then(response => response.body);
     }
 
     async setDescription(type: 'text' | 'html' | 'markdown', content: string) {
-        return await Runtime.setDescription(this.uuid, type, content).then(response => response.body);
+        return await Runtime.setDescription(this.session_id, this.test_run_id, type, content).then(response => response.body);
     }
 
     async addAttachment(title: string, content: ReadStream | { mime: string, buffer: Buffer }) {
-        return await Runtime.addAttachment(this.uuid, title, content).then(response => response.body);
+        return await Runtime.addAttachment(this.session_id, this.test_run_id, title, content).then(response => response.body);
     }
 
     async setSeverity(severity: 'blocker' | 'critical' | 'normal' | 'minor' | 'trivial') {
@@ -82,19 +89,19 @@ export class Session {
     }
 
     async addLabel(name: string, value: string) {
-        return await Runtime.addLabel(this.uuid, name, value).then(response => response.body);
+        return await Runtime.addLabel(this.session_id, this.test_run_id, name, value).then(response => response.body);
     }
 
     async addEnvironment(name: string, value: string) {
-        return await Runtime.addParameter(this.uuid, 'environment-variable', name, value).then(response => response.body);
+        return await Runtime.addParameter(this.session_id, this.test_run_id, 'environment-variable', name, value).then(response => response.body);
     }
 
     async addArgument(kind: string, name: string, value: string) {
-        return await Runtime.addParameter(this.uuid, 'argument', name, value).then(response => response.body);
+        return await Runtime.addParameter(this.session_id, this.test_run_id, 'argument', name, value).then(response => response.body);
     }
 
     async addParameter(kind: string, name: string, value: string) {
-        return await Runtime.addParameter(this.uuid, kind, name, value).then(response => response.body);
+        return await Runtime.addParameter(this.session_id, this.test_run_id, kind, name, value).then(response => response.body);
     }
 
     async writeToXML() {
@@ -106,7 +113,7 @@ export class Session {
     }
 
     private async popData() {
-        return await Runtime.popData(this.uuid).then(response => response.body);
+        return await Runtime.popData(this.test_run_id).then(response => response.body);
     }
 
 }

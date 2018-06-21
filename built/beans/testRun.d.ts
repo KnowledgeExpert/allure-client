@@ -1,9 +1,10 @@
 /// <reference types="node" />
 import { ReadStream } from "fs";
-export declare class Session {
-    private readonly uuid;
+export declare class TestRun {
+    private readonly session_id;
+    private readonly test_run_id;
     private constructor();
-    static create(uuid?: string): Promise<Session>;
+    static create(session_id?: string): Promise<TestRun>;
     startSuite(name: string, timestamp?: number): Promise<any>;
     endSuite(timestamp?: number): Promise<any>;
     startTest(name: string, timestamp?: number): Promise<any>;

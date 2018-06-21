@@ -7,7 +7,7 @@
   "scripts": {
     "clean": "rm -rf ./built ./allure-results",
     "build": "npm run clean && tsc",
-    "test": "npm run clean && npm run build && jasmine ./built/test.js",
+    "test": "npm run build && jasmine ./built/test.js",
     "allure": "allure generate --clean --output ./allure-report ./allure-results"
   },
   "dependencies": {
