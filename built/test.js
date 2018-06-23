@@ -37,7 +37,7 @@ jasmine_cookies_1.Describe('S2', () => {
     jasmine_cookies_1.It(`T2`, async () => {
         const session = await testRun_1.TestRun.create(uuid);
         await session.startSuite("S2");
-        await session.startTest("T1");
+        await session.startTest("T3");
         await session.endTest("passed");
         await session.startTest("T2");
         await session.endTest('skipped');

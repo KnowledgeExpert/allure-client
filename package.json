@@ -1,6 +1,6 @@
 {
   "name": "allure-client",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Allure Http Client",
   "homepage": "https://github.com/KnowledgeExpert/allure-client",
   "main": "./built/index.js",
