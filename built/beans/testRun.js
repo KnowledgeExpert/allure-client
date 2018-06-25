@@ -26,8 +26,6 @@ class TestRun {
         this.test_run_id = test_run_id;
     }
     static async create(session_id) {
-        const b = await runtime_1.Runtime.getNewId().then(response => response.body);
-        console.log(b);
         return new TestRun(session_id ? session_id : await runtime_1.Runtime.getNewId().then(response => response.body), await runtime_1.Runtime.getNewId().then(response => response.body));
     }
     async startSuite(name, timestamp = Date.now()) {

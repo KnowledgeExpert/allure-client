@@ -32,8 +32,6 @@ export class TestRun {
     }
 
     public static async create(session_id?: string): Promise<TestRun> {
-        const b = await Runtime.getNewId().then(response => response.body);
-        console.log(b);
         return new TestRun(
             session_id ? session_id : await Runtime.getNewId().then(response => response.body),
             await Runtime.getNewId().then(response => response.body)

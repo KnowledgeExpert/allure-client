@@ -87,6 +87,7 @@ var Runtime;
         assertTruthy('Content', content);
         return await POST('/attachment', {
             session_id: session_id,
+            test_run_id: test_run_id,
             title: title,
             attachment: content['mime'] ? {
                 value: content['buffer'],
