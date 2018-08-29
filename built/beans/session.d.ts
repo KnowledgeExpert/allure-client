@@ -1,7 +1,7 @@
 /// <reference types="node" />
 import { ReadStream } from "fs";
 export declare class Session {
-    private readonly uuid;
+    readonly uuid: string;
     private constructor();
     static create(uuid?: string): Promise<Session>;
     startSuite(name: string, timestamp?: number): Promise<any>;

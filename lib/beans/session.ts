@@ -23,7 +23,7 @@ import {ReadStream} from "fs";
 
 
 export class Session {
-    private readonly uuid: string;
+    public readonly uuid: string;
 
     private constructor(uuid: string) {
         this.uuid = uuid;

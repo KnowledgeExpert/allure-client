@@ -63,7 +63,7 @@ export namespace Request {
         try {
             return await request(options);
         } finally {
-            console.log(`request sent ${options.method} ${options.uri}`);
+            // console.log(`request sent ${options.method} ${options.uri}`);
         }
     }
 
